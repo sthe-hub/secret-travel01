@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101a36">
+<title>Secret Travel | Sua próxima viagem começa por você</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f8fc;--surface:#fff;--ink:#14213d;--muted:#69758e;--line:#e7eaf2;--blue:#356bff;--violet:#7957f5;--navy:#101a36;--mint:#dff8ef;--shadow:0 12px 35px rgba(24,39,75,.09);--radius:22px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}
+a{color:inherit}
+.hidden{display:none!important}
+.wrap{max-width:1180px;margin:auto;padding:0 22px}
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{min-height:72px;display:flex;align-items:center;gap:24px}
+.brand{font-weight:800;font-size:1.15rem;letter-spacing:-.7px;white-space:nowrap}
+.brand span{color:var(--blue)}
+.brand small{display:block;font-size:.58rem;letter-spacing:2px;color:var(--muted);font-weight:700}
+nav{display:flex;gap:5px;margin-left:auto;flex-wrap:wrap}
+nav button{background:transparent;color:var(--muted);padding:10px 13px;border-radius:99px;font-size:.84rem;font-weight:700}
+nav button.active,nav button:hover{background:#edf2ff;color:var(--blue)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 19px;border-radius:14px;background:var(--blue);color:#fff;font-weight:800;box-shadow:0 8px 18px rgba(53,107,255,.2);transition:.2s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.04)}
+.btn.secondary{background:#eef2ff;color:var(--blue);box-shadow:none}
+.btn.outline{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn.small{padding:9px 13px;font-size:.82rem}
+.hero{margin:30px auto 28px;background:linear-gradient(118deg,#14244a 0%,#2453c6 58%,#7957f5 100%);border-radius:30px;color:white;padding:48px;position:relative;overflow:hidden;min-height:330px;display:flex;align-items:center}
+.hero:before,.hero:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.15);border-radius:50%;width:390px;height:390px;right:-65px;top:-160px}
+.hero:after{width:270px;height:270px;right:40px;top:115px}
+.hero-content{position:relative;z-index:1;max-width:660px}
+.eyebrow{font-size:.72rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#b9d5ff}
+.hero h1{font-size:clamp(2.5rem,6vw,4.7rem);line-height:1.04;letter-spacing:-2.8px;margin:15px 0}
+.hero p{color:#e0e8ff;max-width:570px;font-size:1.02rem;margin-bottom:25px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero .btn{background:white;color:#2453c6;box-shadow:none}
+.hero .btn.secondary{background:rgba(255,255,255,.14);color:white;border:1px solid rgba(255,255,255,.25)}
+.hero-art{position:absolute;right:8%;font-size:clamp(7rem,18vw,14rem);opacity:.22;transform:rotate(-12deg)}
+main{padding-bottom:70px}
+.section{margin:34px auto}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:18px}
+.kicker{color:var(--blue);font-size:.7rem;font-weight:800;letter-spacing:1.8px;text-transform:uppercase}
+h2{font-size:clamp(1.45rem,3vw,2.05rem);letter-spacing:-1px;line-height:1.2;margin-top:5px}
+.sub{color:var(--muted);font-size:.91rem;margin-top:7px;max-width:690px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0}
+.stat{background:#fff;border:1px solid var(--line);padding:18px;border-radius:18px}
+.stat b{display:block;font-size:1.5rem;color:var(--blue)}
+.stat span{color:var(--muted);font-size:.78rem;font-weight:700}
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 4px 18px rgba(24,39,75,.035)}
+.profile-banner{display:flex;align-items:center;gap:16px;background:#edf2ff;border:1px solid #dce5ff;border-radius:20px;padding:18px 20px;margin-bottom:18px}
+.profile-emoji{font-size:2.3rem}
+.profile-banner p{font-size:.85rem;color:var(--muted)}
+.profile-banner strong{display:block;font-size:1.05rem}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.toolbar input,.toolbar select,.field input,.field select,.field textarea{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:13px;padding:12px 14px;outline:none;width:100%}
+.toolbar input{flex:1;min-width:220px}
+.toolbar select{width:auto;min-width:150px}
+.toolbar input:focus,.toolbar select:focus,.field input:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(53,107,255,.1)}
+chips{display:flex}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 20px}
+.chip{padding:8px 13px;border-radius:99px;background:white;border:1px solid var(--line);color:var(--muted);font-size:.78rem;font-weight:800}
+.chip.active,.chip:hover{background:var(--blue);border-color:var(--blue);color:white}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 5px 20px rgba(24,39,75,.05);transition:.22s;cursor:pointer}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.cover{height:190px;position:relative;background:linear-gradient(135deg,#356bff,#7957f5);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.card:hover .cover img{transform:scale(1.05)}
+.cover .fallback{font-size:4.3rem;position:absolute}
+.cover .region{position:absolute;left:13px;top:13px;background:rgba(16,26,54,.72);color:white;padding:6px 10px;border-radius:99px;font-size:.68rem;font-weight:800}
+.cover .match{position:absolute;right:13px;top:13px;background:#0caa7b;color:white;padding:6px 10px;border-radius:99px;font-size:.68rem;font-weight:800}
+.heart{position:absolute;right:13px;bottom:13px;width:39px;height:39px;border-radius:50%;background:rgba(16,26,54,.68);color:#fff;font-size:1.15rem}
+.heart.on{background:#ed5571}
+.card-body{padding:17px}
+.card-body h3{font-size:1.03rem;letter-spacing:-.3px}
+.card-body p{font-size:.8rem;color:var(--muted);margin-top:6px;min-height:43px}
+.card-meta{display:flex;justify-content:space-between;align-items:center;margin-top:13px;padding-top:12px;border-top:1px solid var(--line);font-size:.77rem;color:var(--muted)}
+.card-meta b{color:var(--ink)}
+.empty{grid-column:1/-1;text-align:center;padding:45px;color:var(--muted);background:white;border-radius:18px}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.feature{padding:20px;border:1px solid var(--line);border-radius:18px;background:white}
+.feature .ico{font-size:1.6rem}
+.feature h3{font-size:.96rem;margin:10px 0 5px}
+.feature p{font-size:.8rem;color:var(--muted)}
+.dark-section{background:var(--navy);color:white;border-radius:28px;padding:30px}
+.dark-section .sub{color:#bac5df}
+.dark-section .kicker{color:#9fc0ff}
+.dark-section .panel{color:var(--ink)}
+.hotel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:18px}
+.hotel{background:white;color:var(--ink);border-radius:18px;padding:18px;border:1px solid var(--line)}
+.hotel .hotel-icon{font-size:1.8rem}
+.hotel h3{font-size:.95rem;margin:8px 0 5px}
+.hotel p{font-size:.78rem;color:var(--muted);min-height:55px}
+.hotel .kind{display:inline-block;margin-top:10px;background:#eef2ff;color:var(--blue);font-size:.68rem;font-weight:800;padding:5px 9px;border-radius:99px}
+.hotel a{display:inline-block;margin-top:13px;color:var(--blue);font-size:.78rem;font-weight:800;text-decoration:none}
+.hotel a:hover{text-decoration:underline}
+.quiz-shell{max-width:760px;margin:42px auto;background:white;border:1px solid var(--line);border-radius:26px;padding:30px;box-shadow:var(--shadow)}
+.progress{height:8px;background:#edf0f7;border-radius:99px;overflow:hidden;margin:17px 0 26px}
+.progress span{height:100%;display:block;background:linear-gradient(90deg,var(--blue),var(--violet));width:0;transition:.3s}
+.question{font-size:1.45rem;letter-spacing:-.7px;margin-bottom:20px}
+.options{display:grid;gap:11px}
+.option{padding:15px 17px;text-align:left;background:#fff;border:1px solid var(--line);border-radius:15px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:13px;transition:.18s}
+.option span{font-size:1.45rem}
+.option:hover{border-color:var(--blue);background:#f5f7ff;transform:translateX(3px)}
+.quiz-top{display:flex;justify-content:space-between;color:var(--muted);font-size:.78rem;font-weight:800}
+.planner-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+.field{margin:13px 0}
+.field label{display:block;font-size:.78rem;font-weight:800;margin-bottom:7px}
+.field textarea{min-height:100px;resize:vertical}
+.budget-result{background:linear-gradient(135deg,#14244a,#356bff);color:white;border-radius:18px;padding:20px}
+.budget-result small{color:#d3e0ff;font-weight:700}
+.budget-result strong{display:block;font-size:2rem;margin:5px 0}
+.plan-list{list-style:none;margin-top:14px;display:grid;gap:9px}
+.plan-list li{display:flex;gap:10px;align-items:start;padding:12px;border:1px solid var(--line);border-radius:13px;font-size:.83rem}
+.plan-list button{margin-left:auto;background:#eef2ff;color:var(--blue);border-radius:8px;padding:5px 8px;font-weight:800}
+.modal{position:fixed;inset:0;background:rgba(8,16,36,.72);z-index:50;display:flex;align-items:center;justify-content:center;padding:18px}
+.modal-box{background:white;border-radius:24px;max-width:760px;width:100%;max-height:92vh;overflow:auto;position:relative}
+.modal-cover{height:260px;background:linear-gradient(135deg,#356bff,#7957f5);position:relative}
+.modal-cover img{width:100%;height:100%;object-fit:cover}
+.modal-cover .close{position:absolute;right:14px;top:14px;background:rgba(16,26,54,.72);color:white;width:40px;height:40px;border-radius:50%;font-size:1.3rem}
+.modal-content{padding:25px}
+.modal-content h2{margin:8px 0}
+.modal-content p{color:var(--muted);font-size:.88rem}
+.modal-columns{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+.info-box{background:#f6f8fc;border-radius:15px;padding:15px}
+.info-box h4{font-size:.83rem;margin-bottom:8px}
+.info-box ul{padding-left:18px;color:var(--muted);font-size:.8rem}
+.modal-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
+.scoreline{display:flex;align-items:center;gap:9px;font-size:.75rem;margin:8px 0}
+.scoreline b{width:125px}
+.scoreline i{height:7px;background:#e8ecf5;border-radius:9px;flex:1;overflow:hidden}
+.scoreline em{display:block;height:100%;background:var(--blue)}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--navy);color:white;padding:12px 18px;border-radius:12px;z-index:100;box-shadow:var(--shadow);font-size:.82rem}
+footer{background:#0d1730;color:#b9c4de;padding:35px 0;margin-top:50px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer strong{color:white}
+.note{font-size:.73rem;color:var(--muted);margin-top:14px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.hotel-grid,.feature-grid{grid-template-columns:repeat(2,1fr)}nav{order:3;width:100%;margin:0 0 10px;overflow:auto}.nav{padding-top:10px;flex-wrap:wrap;gap:8px}.hero{padding:34px}.hero-art{right:0}.planner-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.wrap{padding:0 14px}.hero{padding:28px 22px;min-height:390px}.hero-art{right:-10px;bottom:0;top:auto;font-size:8rem}.hero-content{max-width:100%}.stats{grid-template-columns:repeat(2,1fr)}.grid,.hotel-grid,.feature-grid{grid-template-columns:1fr}.cover{height:210px}.section-head{align-items:start;flex-direction:column}.quiz-shell{padding:22px 17px;margin:22px auto}.modal-columns{grid-template-columns:1fr}.modal-cover{height:200px}.toolbar select{flex:1}.dark-section{padding:22px 16px}}
+
+/* Acesso local: preserva a identidade visual original */
+.login-trigger{padding:10px 16px;white-space:nowrap}.login-trigger.signed{background:#eaf8f2;color:#147b5c;box-shadow:none}
+.login-modal{position:fixed;inset:0;z-index:70;background:rgba(8,16,36,.68);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:18px}
+.login-card{width:min(100%,440px);background:#fff;border-radius:24px;padding:30px;box-shadow:0 30px 90px rgba(0,0,0,.25);position:relative}
+.login-card .login-mark{width:54px;height:54px;border-radius:18px;background:linear-gradient(135deg,#356bff,#7957f5);display:grid;place-items:center;color:#fff;font-size:1.6rem;margin-bottom:18px}
+.login-card h2{font-size:1.55rem;margin:0 0 7px}.login-card p{color:var(--muted);font-size:.88rem;margin-bottom:20px}.login-card label{display:block;font-weight:800;font-size:.8rem;margin:14px 0 7px}.login-card input{width:100%;border:1px solid var(--line);border-radius:14px;padding:13px 14px;outline:none}.login-card input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(53,107,255,.1)}
+.login-close{position:absolute;right:18px;top:18px;width:38px;height:38px;border-radius:50%;background:#f1f3f8;color:var(--ink);font-size:1.3rem}.login-note{padding:12px 13px;background:#f4f6fb;border-radius:13px;font-size:.73rem!important;line-height:1.55;color:#69758e!important;margin:15px 0 0!important}
+@media(max-width:900px){.login-trigger{margin-left:auto}.nav{align-items:center}}@media(max-width:600px){.login-trigger{padding:9px 12px;font-size:.78rem}.login-card{padding:25px 21px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap nav">
+  <div class="brand">✦ SECRET <span>TRAVEL</span><small>DESCUBRA SEU PRÓXIMO DESTINO</small></div>
+  <nav id="nav">
+   <button data-view="home" class="active">Início</button>
+   <button data-view="destinations">Destinos</button>
+   <button data-view="hotels">Hospedagens</button>
+   <button data-view="planner">Planejar viagem</button>
+   <button data-view="favorites">♥ Favoritos <span id="favCount"></span></button>
+  </nav>
+  <button class="btn login-trigger" id="loginOpen"><span id="loginLabel">Entrar</span> <span aria-hidden="true">↗</span></button>
+ </div>
+</header>
+<main class="wrap">
+ <section id="homeView">
+  <div class="hero">
+   <div class="hero-content">
+    <div class="eyebrow">✦ Sua personalidade, seu próximo destino</div>
+    <h1>O mundo é enorme.<br>Descubra o que combina com você.</h1>
+    <p>Responda a algumas perguntas, descubra seu estilo de viajante e encontre destinos e hospedagens que têm a sua cara.</p>
+    <div class="hero-actions">
+     <button class="btn" id="startQuiz">Descobrir meu perfil →</button>
+     <button class="btn secondary" id="exploreBtn">Explorar destinos</button>
+    </div>
+   </div>
+   <div class="hero-art">✈</div>
+  </div>
+  <div class="stats">
+   <div class="stat"><b id="destCount">64+</b><span>DESTINOS PARA DESCOBRIR</span></div>
+   <div class="stat"><b>6</b><span>PERFIS DE VIAJANTE</span></div>
+   <div class="stat"><b>3</b><span>ESTILOS DE HOSPEDAGEM</span></div>
+   <div class="stat"><b>1</b><span>PRÓXIMA GRANDE AVENTURA</span></div>
+  </div>
+  <div id="profileHome"></div>
+  <section class="section">
+   <div class="section-head"><div><div class="kicker">Escolhas em destaque</div><h2>Inspiração para começar</h2><p class="sub">Alguns lugares para despertar sua vontade de fazer as malas.</p></div><button class="btn secondary small" onclick="setView('destinations')">Ver todos os destinos →</button></div>
+   <div class="grid" id="featuredGrid"></div>
+  </section>
+  <section class="section">
+   <div class="section-head"><div><div class="kicker">Como funciona</div><h2>Da curiosidade ao plano de viagem</h2></div></div>
+   <div class="feature-grid">
+    <div class="feature"><div class="ico">🧭</div><h3>Descubra seu estilo</h3><p>Um quiz rápido identifica o tipo de experiência que mais combina com suas escolhas.</p></div>
+    <div class="feature"><div class="ico">🌎</div><h3>Encontre destinos</h3><p>Explore uma seleção internacional e filtre por região, orçamento e interesses.</p></div>
+    <div class="feature"><div class="ico">🛏️</div><h3>Encontre hospedagens</h3><p>Veja estilos de hospedagem indicados e abra uma pesquisa externa para comparar opções.</p></div>
+   </div>
+  </section>
+ </section>
+
+ <section id="quizView" class="hidden">
+  <div class="quiz-shell">
+   <div class="quiz-top"><span id="quizCount">PERGUNTA 1 DE 6</span><button id="quitQuiz" style="background:none;color:var(--muted);font-weight:800">Sair ✕</button></div>
+   <div class="progress"><span id="quizProgress"></span></div>
+   <h2 class="question" id="questionText"></h2>
+   <div class="options" id="options"></div>
+  </div>
+ </section>
+
+ <section id="destinationsView" class="section hidden">
+  <div class="section-head"><div><div class="kicker">Explore o mundo</div><h2>Encontre seu próximo lugar favorito</h2><p class="sub">Pesquise, filtre e abra cada destino para ver detalhes, afinidade e sugestões de hospedagem.</p></div><button class="btn small" id="quizFromDest">Fazer meu quiz</button></div>
+  <div id="profileDest"></div>
+  <div class="toolbar">
+   <input id="searchDest" placeholder="🔎  Buscar destino, país ou experiência...">
+   <select id="regionFilter"><option value="Todos">Todas as regiões</option><option>Europa</option><option>Ásia</option><option>África</option><option>Américas</option><option>Oceania</option></select>
+   <select id="budgetFilter"><option value="0">Qualquer orçamento</option><option value="3000">Até R$ 3.000</option><option value="5000">Até R$ 5.000</option><option value="8000">Até R$ 8.000</option><option value="12000">Até R$ 12.000</option></select>
+   <select id="styleFilter"><option value="Todos">Todos os estilos</option><option value="Aventura">Aventura</option><option value="Cultura">Cultura</option><option value="Relaxamento">Relaxamento</option><option value="Gastronomia">Gastronomia</option><option value="Vida noturna">Vida noturna</option><option value="Romance">Romance</option></select>
+  </div>
+  <div class="chips" id="regionChips"></div>
+  <div class="grid" id="destinationGrid"></div>
+  <p class="note">Estimativas de orçamento por pessoa, apenas como referência para comparação. Não são cotações, nem incluem necessariamente todos os custos.</p>
+ </section>
+
+ <section id="hotelsView" class="section hidden">
+  <div class="dark-section">
+   <div class="kicker">Hospedagem com a sua cara</div><h2>Não é só onde dormir. É parte da viagem.</h2>
+   <p class="sub">O Secret Travel relaciona seu perfil e o destino a estilos de hospedagem que podem fazer sentido para sua experiência.</p>
+   <div class="toolbar">
+    <select id="hotelDest" style="flex:1"><option value="">Escolha um destino</option></select>
+    <select id="hotelStyle" style="flex:1"><option value="auto">Recomendação pelo meu perfil</option><option value="econômico">Econômico</option><option value="boutique">Boutique e charme</option><option value="resort">Resort e descanso</option><option value="luxo">Conforto e luxo</option><option value="natureza">Natureza e aventura</option></select>
+    <button class="btn" id="findHotels">Ver recomendações</button>
+   </div>
+   <div id="hotelIntro" class="sub">Selecione um destino para visualizar sugestões de hospedagem.</div>
+   <div id="hotelResults" class="hotel-grid"></div>
+  </div>
+  <p class="note">As categorias são sugestões de estilo, não nomes de hotéis verificados. Use os links para pesquisar estabelecimentos, avaliações, preços e disponibilidade em serviços externos.</p>
+ </section>
+
+ <section id="plannerView" class="section hidden">
+  <div class="section-head"><div><div class="kicker">Tire a ideia do papel</div><h2>Seu pequeno centro de planejamento</h2><p class="sub">Escolha um destino, informe duração e estilo de orçamento. O site cria uma estimativa inicial e uma lista de itens para organizar.</p></div></div>
+  <div class="planner-grid">
+   <div class="panel">
+    <div class="field"><label for="planDestination">Destino</label><select id="planDestination"></select></div>
+    <div class="field"><label for="days">Quantos dias?</label><input type="number" id="days" min="1" max="60" value="7"></div>
+    <div class="field"><label for="people">Quantas pessoas?</label><input type="number" id="people" min="1" max="20" value="1"></div>
+    <div class="field"><label for="travelStyle">Estilo de orçamento</label><select id="travelStyle"><option value="1">Econômico</option><option value="1.55" selected>Confortável</option><option value="2.3">Premium</option></select></div>
+    <div class="field"><label for="extraNotes">Anotações da viagem</label><textarea id="extraNotes" placeholder="Ex.: quero conhecer museus, experimentar a culinária local..."></textarea></div>
+    <button class="btn" id="calculatePlan">Calcular estimativa</button>
+   </div>
+   <div>
+    <div class="budget-result"><small>ESTIMATIVA INICIAL DO GRUPO</small><strong id="budgetTotal">R$ —</strong><span id="budgetBreakdown" style="font-size:.8rem;color:#e0e8ff">Escolha os dados ao lado para calcular.</span></div>
+    <div class="panel" style="margin-top:15px"><h3>Checklist da viagem</h3><ul class="plan-list" id="checklist">
+     <li><span>☐</span> Definir datas e duração</li><li><span>☐</span> Comparar passagens e hospedagens</li><li><span>☐</span> Conferir documentos e requisitos de entrada</li><li><span>☐</span> Organizar seguro e transporte local</li><li><span>☐</span> Montar roteiro e reservar atividades</li>
+    </ul><button class="btn secondary small" id="copyPlan" style="margin-top:14px">Copiar meu planejamento</button></div>
+   </div>
+  </div>
+  <p class="note">A estimativa é uma simulação simplificada baseada no orçamento de referência cadastrado para cada destino. Não representa preço de passagem, hotel ou pacote disponível.</p>
+ </section>
+
+ <section id="favoritesView" class="section hidden">
+  <div class="section-head"><div><div class="kicker">Sua lista pessoal</div><h2>Destinos que você guardou</h2><p class="sub">Seus favoritos ficam salvos neste navegador.</p></div></div>
+  <div class="grid" id="favoritesGrid"></div>
+ </section>
+</main>
+<footer><div class="wrap"><div><strong>✦ SECRET TRAVEL</strong><p style="font-size:.78rem;margin-top:6px">Descubra destinos que combinam com você.</p></div><div style="font-size:.75rem;max-width:520px">Projeto demonstrativo de inspiração de viagens. Recomendações, afinidades e estimativas são orientativas. Confirme informações, preços, condições e disponibilidade diretamente com os fornecedores.</div></div></footer>
+
+<div id="detailModal" class="modal hidden" role="dialog" aria-modal="true"><div class="modal-box" id="modalBox"></div></div>
+<div id="toast" class="toast hidden"></div>
+<div id="loginModal" class="login-modal hidden" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+ <div class="login-card">
+  <button class="login-close" id="loginClose" aria-label="Fechar">×</button>
+  <div class="login-mark">✦</div><div class="kicker">SEU ESPAÇO DE VIAGEM</div>
+  <h2 id="loginTitle">Bem-vindo ao Secret Travel</h2>
+  <p>Entre com seu nome para personalizar sua experiência e encontrar suas ideias de viagem com facilidade.</p>
+  <form id="loginForm"><label for="loginName">Como podemos chamar você?</label><input id="loginName" name="name" maxlength="40" autocomplete="nickname" placeholder="Seu nome" required><button class="btn" type="submit" style="width:100%;margin-top:16px">Continuar →</button></form>
+  <p class="login-note">Seu perfil e suas preferências ficam salvos somente neste navegador. Esta opção personaliza sua experiência neste dispositivo; não cria uma conta online nem utiliza senha.</p>
+ </div>
+</div>
+
+<script>
+const profiles=[
+ {name:"Aventureiro",emoji:"🧗",desc:"Você vive de adrenalina, trilhas e paisagens selvagens.",style:"natureza"},
+ {name:"Explorador cultural",emoji:"🏛️",desc:"Você viaja para mergulhar em história, arte e tradições.",style:"boutique"},
+ {name:"Relaxado",emoji:"🏝️",desc:"Você busca descanso, natureza e tempo para si.",style:"resort"},
+ {name:"Gastrônomo",emoji:"🍜",desc:"Você planeja a viagem em torno do que vai comer.",style:"boutique"},
+ {name:"Festeiro",emoji:"🎉",desc:"Você quer noite animada, gente nova e energia na cidade.",style:"econômico"},
+ {name:"Romântico",emoji:"💞",desc:"Você sonha com pôr do sol, charme e momentos a dois.",style:"boutique"}
+];
+const destinations=[
+{id:1,n:"Paris",country:"França",region:"Europa",emoji:"🗼",img:"https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1000",budget:6200,desc:"Museus, cafés, arquitetura icônica e passeios ao longo do Sena.",tags:["Cultura","Gastronomia","Romance"],w:[.2,.9,.4,.9,.5,1],spots:["Torre Eiffel","Museu do Louvre","Montmartre","Passeio pelo Sena"]},
+{id:2,n:"Roma",country:"Itália",region:"Europa",emoji:"🍝",img:"https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000",budget:5700,desc:"Uma viagem pela história, com praças, ruínas e uma culinária inesquecível.",tags:["Cultura","Gastronomia","Romance"],w:[.3,1,.4,1,.5,.8],spots:["Coliseu","Fórum Romano","Fontana di Trevi","Trastevere"]},
+{id:3,n:"Santorini",country:"Grécia",region:"Europa",emoji:"🏛️",img:"https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1000",budget:7800,desc:"Vilas brancas, mar azul e pores do sol cinematográficos no Egeu.",tags:["Relaxamento","Romance","Gastronomia"],w:[.3,.5,.8,.7,.5,1],spots:["Oia","Fira","Praia Vermelha","Vinícolas locais"]},
+{id:4,n:"Londres",country:"Reino Unido",region:"Europa",emoji:"🎡",img:"https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1000",budget:7200,desc:"Museus, parques, musicais e bairros cheios de personalidade.",tags:["Cultura","Gastronomia","Vida noturna"],w:[.2,.9,.3,.6,.8,.4],spots:["British Museum","Westminster","Covent Garden","Hyde Park"]},
+{id:5,n:"Islândia",country:"Islândia",region:"Europa",emoji:"🌌",img:"https://images.unsplash.com/photo-1476610182048-b716b8518aae?auto=format&fit=crop&w=1000",budget:9800,desc:"Cachoeiras, vulcões, águas termais e paisagens de outro planeta.",tags:["Aventura","Relaxamento"],w:[1,.4,.6,.3,.3,.8],spots:["Círculo Dourado","Blue Lagoon","Cachoeiras do sul","Aurora boreal (sazonal)"]},
+{id:6,n:"Barcelona",country:"Espanha",region:"Europa",emoji:"🏖️",img:"https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1000",budget:5900,desc:"Arte modernista, praias urbanas, tapas e ruas vibrantes.",tags:["Cultura","Gastronomia","Vida noturna"],w:[.5,.8,.5,.9,1,.6],spots:["Sagrada Família","Parc Güell","Bairro Gótico","Barceloneta"]},
+{id:7,n:"Lisboa",country:"Portugal",region:"Europa",emoji:"🚋",img:"https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&w=1000",budget:4300,desc:"Miradouros, azulejos, música, bairros históricos e boa mesa.",tags:["Cultura","Gastronomia","Romance"],w:[.3,.9,.5,1,.7,.7],spots:["Alfama","Torre de Belém","LX Factory","Miradouro da Senhora do Monte"]},
+{id:8,n:"Praga",country:"Tchéquia",region:"Europa",emoji:"🏰",img:"https://images.unsplash.com/photo-1541849546-216549ae216d?auto=format&fit=crop&w=1000",budget:4900,desc:"Castelos, pontes históricas e uma atmosfera medieval encantadora.",tags:["Cultura","Romance"],w:[.4,1,.5,.7,.6,.8],spots:["Ponte Carlos","Castelo de Praga","Praça da Cidade Velha","Bairro de Malá Strana"]},
+{id:9,n:"Kyoto",country:"Japão",region:"Ásia",emoji:"⛩️",img:"https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1000",budget:7500,desc:"Templos, jardins, casas de chá e tradições preservadas.",tags:["Cultura","Relaxamento","Gastronomia"],w:[.4,1,.7,.8,.2,.6],spots:["Fushimi Inari","Arashiyama","Gion","Kinkaku-ji"]},
+{id:10,n:"Tóquio",country:"Japão",region:"Ásia",emoji:"🌃",img:"https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1000",budget:9200,desc:"Tecnologia, cultura pop, bairros criativos e gastronomia extraordinária.",tags:["Cultura","Gastronomia","Vida noturna"],w:[.5,.8,.3,1,.8,.4],spots:["Shibuya","Shinjuku","Asakusa","Mercado de Tsukiji/Toyosu"]},
+{id:11,n:"Bali",country:"Indonésia",region:"Ásia",emoji:"🌴",img:"https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000",budget:5900,desc:"Arrozais, templos, praias, bem-estar e natureza tropical.",tags:["Aventura","Relaxamento","Romance"],w:[.8,.7,.9,.6,.5,.8],spots:["Ubud","Templo de Uluwatu","Tegallalang","Nusa Penida"]},
+{id:12,n:"Dubai",country:"Emirados Árabes",region:"Ásia",emoji:"🏙️",img:"https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1000",budget:10500,desc:"Arquitetura futurista, deserto, compras e experiências sofisticadas.",tags:["Aventura","Vida noturna","Romance"],w:[.6,.4,.6,.6,.8,.5],spots:["Burj Khalifa","Dubai Marina","Deserto","Dubai Creek"]},
+{id:13,n:"Seul",country:"Coreia do Sul",region:"Ásia",emoji:"🌆",img:"https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1000",budget:8500,desc:"Palácios, cultura pop, mercados e bairros cheios de energia.",tags:["Cultura","Gastronomia","Vida noturna"],w:[.4,.9,.3,1,1,.5],spots:["Palácio Gyeongbokgung","Bukchon Hanok","Myeongdong","Hongdae"]},
+{id:14,n:"Bangkok",country:"Tailândia",region:"Ásia",emoji:"🛕",img:"https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1000",budget:4800,desc:"Templos dourados, mercados, comida de rua e vida noturna.",tags:["Cultura","Gastronomia","Vida noturna"],w:[.5,.8,.4,1,.9,.4],spots:["Wat Arun","Grand Palace","Chatuchak","Chinatown"]},
+{id:15,n:"Maldivas",country:"Maldivas",region:"Ásia",emoji:"🏝️",img:"https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1000",budget:14500,desc:"Águas cristalinas, recifes e dias dedicados ao descanso.",tags:["Relaxamento","Romance"],w:[.4,.1,1,.4,.2,1],spots:["Atóis e praias","Mergulho nos recifes","Passeio de barco","Jantar à beira-mar"]},
+{id:16,n:"Marrakech",country:"Marrocos",region:"África",emoji:"🕌",img:"https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=1000",budget:5700,desc:"Souks, riads, jardins e sabores marcantes do norte da África.",tags:["Cultura","Gastronomia","Aventura"],w:[.7,.9,.5,.8,.4,.6],spots:["Jemaa el-Fna","Jardim Majorelle","Palácio Bahia","Medina"]},
+{id:17,n:"Cidade do Cabo",country:"África do Sul",region:"África",emoji:"⛰️",img:"https://images.unsplash.com/photo-1580060839134-75a5edca2e99?auto=format&fit=crop&w=1000",budget:7600,desc:"Montanhas, vinícolas, praias e uma cena cultural vibrante.",tags:["Aventura","Gastronomia","Relaxamento"],w:[.9,.7,.7,.8,.5,.6],spots:["Table Mountain","Cabo da Boa Esperança","Bo-Kaap","Vinícolas de Stellenbosch"]},
+{id:18,n:"Zanzibar",country:"Tanzânia",region:"África",emoji:"🐚",img:"https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1000",budget:8900,desc:"Praias de areia clara, mar quente e cultura suaíli.",tags:["Relaxamento","Romance"],w:[.5,.6,1,.7,.3,.9],spots:["Stone Town","Nungwi","Jozani Forest","Passeio de dhow"]},
+{id:19,n:"Cairo e Giza",country:"Egito",region:"África",emoji:"🐪",img:"https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1000",budget:6300,desc:"Monumentos milenares, museus e uma imersão na história egípcia.",tags:["Cultura","Aventura"],w:[.8,1,.3,.4,.2,.3],spots:["Pirâmides de Gizé","Grande Museu Egípcio","Esfinge","Khan el-Khalili"]},
+{id:20,n:"Rio de Janeiro",country:"Brasil",region:"Américas",emoji:"🏖️",img:"https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=1000",budget:3200,desc:"Praias, montanhas, samba, mirantes e uma energia inconfundível.",tags:["Aventura","Relaxamento","Vida noturna"],w:[.7,.5,.7,.6,1,.6],spots:["Cristo Redentor","Pão de Açúcar","Ipanema","Lapa"]},
+{id:21,n:"Patagônia",country:"Chile e Argentina",region:"Américas",emoji:"🏔️",img:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000",budget:9800,desc:"Geleiras, montanhas e trilhas em paisagens grandiosas.",tags:["Aventura","Natureza"],w:[1,.3,.4,.3,.1,.5],spots:["Torres del Paine","Perito Moreno","El Chaltén","Parque Nacional Los Glaciares"]},
+{id:22,n:"Nova York",country:"Estados Unidos",region:"Américas",emoji:"🗽",img:"https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=1000",budget:9800,desc:"A energia de Manhattan, espetáculos, parques e gastronomia global.",tags:["Cultura","Gastronomia","Vida noturna"],w:[.4,.8,.2,.8,.9,.5],spots:["Central Park","Broadway","Metropolitan Museum","Brooklyn"]},
+{id:23,n:"Cusco",country:"Peru",region:"Américas",emoji:"🦙",img:"https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=1000",budget:5900,desc:"Herança inca, mercados andinos e acesso a paisagens históricas.",tags:["Aventura","Cultura"],w:[.9,1,.3,.7,.2,.5],spots:["Centro histórico","Vale Sagrado","Machu Picchu","Sacsayhuamán"]},
+{id:24,n:"Buenos Aires",country:"Argentina",region:"Américas",emoji:"💃",img:"https://images.unsplash.com/photo-1589909202802-8f4aadce1849?auto=format&fit=crop&w=1000",budget:3900,desc:"Tango, cafés, livrarias e uma vida cultural intensa.",tags:["Cultura","Gastronomia","Vida noturna","Romance"],w:[.2,.9,.4,1,.8,.7],spots:["San Telmo","Recoleta","Palermo","Teatro Colón"]},
+{id:25,n:"Fernando de Noronha",country:"Brasil",region:"Américas",emoji:"🐬",img:"https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1000",budget:8500,desc:"Um arquipélago de praias preservadas, trilhas e vida marinha.",tags:["Aventura","Relaxamento","Romance"],w:[.8,.3,1,.4,.2,.8],spots:["Baía do Sancho","Baía dos Porcos","Praia do Leão","Trilhas e mirantes"]},
+{id:26,n:"Cartagena",country:"Colômbia",region:"Américas",emoji:"🌺",img:"https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?auto=format&fit=crop&w=1000",budget:5100,desc:"Centro colonial colorido, música caribenha e passeios pelo mar.",tags:["Cultura","Relaxamento","Vida noturna"],w:[.4,.9,.7,.8,.8,.8],spots:["Cidade Amuralhada","Castillo San Felipe","Getsemaní","Ilhas do Rosário"]},
+{id:27,n:"Sydney",country:"Austrália",region:"Oceania",emoji:"🦘",img:"https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1000",budget:11900,desc:"Praias urbanas, arquitetura icônica e vida ao ar livre.",tags:["Aventura","Relaxamento","Vida noturna"],w:[.8,.4,.7,.6,.7,.5],spots:["Opera House","Harbour Bridge","Bondi Beach","The Rocks"]},
+{id:28,n:"Queenstown",country:"Nova Zelândia",region:"Oceania",emoji:"🚵",img:"https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1000",budget:11200,desc:"Montanhas, lagos e atividades ao ar livre para quem busca emoção.",tags:["Aventura","Natureza"],w:[1,.3,.6,.4,.4,.5],spots:["Lake Wakatipu","Gondola Skyline","Milford Sound","Trilhas locais"]},
+{id:29,n:"Maui",country:"Havaí, EUA",region:"Oceania",emoji:"🌺",img:"https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1000",budget:13200,desc:"Praias, estradas panorâmicas e natureza tropical.",tags:["Aventura","Relaxamento","Romance"],w:[.7,.3,.9,.5,.4,.8],spots:["Road to Hana","Haleakalā","Kāʻanapali","Praias e enseadas"]},
+{id:30,n:"Florença",country:"Itália",region:"Europa",emoji:"🎨",img:"https://images.unsplash.com/photo-1543429257-3eb0b65d2b23?auto=format&fit=crop&w=1000",budget:6100,desc:"Arte renascentista, arquitetura e gastronomia toscana.",tags:["Cultura","Gastronomia","Romance"],w:[.2,1,.4,1,.3,.8],spots:["Galeria Uffizi","Duomo","Ponte Vecchio","Mercato Centrale"]},
+{id:31,n:"Hoi An",country:"Vietnã",region:"Ásia",emoji:"🏮",img:"https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1000",budget:5200,desc:"Lanternas, arquitetura histórica, praias próximas e cozinha vietnamita.",tags:["Cultura","Gastronomia","Romance"],w:[.4,.9,.6,1,.3,.8],spots:["Cidade Antiga","Ponte Japonesa","Mercado Central","Praia An Bang"]},
+{id:32,n:"La Paz",country:"Bolívia",region:"Américas",emoji:"🚠",img:"https://images.unsplash.com/photo-1580746738099-5e4b8f6c1e1b?auto=format&fit=crop&w=1000",budget:3700,desc:"Paisagens andinas, mercados tradicionais e uma cidade surpreendente.",tags:["Aventura","Cultura"],w:[.9,.9,.2,.6,.3,.3],spots:["Valle de la Luna","Mi Teleférico","Mercado das Bruxas","Centro histórico"]}
+,
+{"id":33,"n":"Amsterdã","country":"Países Baixos","region":"Europa","emoji":"🚲","img":"https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=1000","budget":6500,"desc":"Canais, museus renomados, arquitetura charmosa e bairros criativos.","tags":["Cultura","Gastronomia","Romance"],"w":[0.3,0.9,0.5,0.8,0.7,0.7],"spots":["Museu Van Gogh","Casa de Anne Frank","Jordaan","Passeio pelos canais"]},
+{"id":34,"n":"Edimburgo","country":"Escócia","region":"Europa","emoji":"🏰","img":"https://images.unsplash.com/photo-1506377585622-bedcbb027afc?auto=format&fit=crop&w=1000","budget":6800,"desc":"Castelos, vielas históricas, pubs acolhedores e paisagens escocesas.","tags":["Cultura","Aventura","Romance"],"w":[0.6,1,0.4,0.6,0.5,0.8],"spots":["Castelo de Edimburgo","Royal Mile","Arthur’s Seat","Dean Village"]},
+{"id":35,"n":"Viena","country":"Áustria","region":"Europa","emoji":"🎼","img":"https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1000","budget":6900,"desc":"Palácios, música clássica, cafés tradicionais e elegância imperial.","tags":["Cultura","Gastronomia","Romance"],"w":[0.2,1,0.5,0.8,0.4,0.8],"spots":["Palácio Schönbrunn","Catedral de Santo Estêvão","Belvedere","Café Central"]},
+{"id":36,"n":"Copenhague","country":"Dinamarca","region":"Europa","emoji":"🚲","img":"https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=1000","budget":7900,"desc":"Design escandinavo, gastronomia criativa, bicicletas e vida urbana tranquila.","tags":["Cultura","Gastronomia","Relaxamento"],"w":[0.3,0.9,0.7,0.9,0.6,0.7],"spots":["Nyhavn","Jardins Tivoli","Palácio Amalienborg","Christiania"]},
+{"id":37,"n":"Dubrovnik","country":"Croácia","region":"Europa","emoji":"🌊","img":"https://images.unsplash.com/photo-1555990793-da11153b2473?auto=format&fit=crop&w=1000","budget":7100,"desc":"Muralhas medievais, mar Adriático e cenários históricos à beira-mar.","tags":["Cultura","Relaxamento","Romance"],"w":[0.5,0.9,0.8,0.6,0.5,0.9],"spots":["Muralhas da Cidade","Stradun","Ilha Lokrum","Monte Srđ"]},
+{"id":38,"n":"Istambul","country":"Turquia","region":"Europa","emoji":"🕌","img":"https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1000","budget":5900,"desc":"Uma mistura fascinante de continentes, bazares, mesquitas e sabores.","tags":["Cultura","Gastronomia","Aventura"],"w":[0.5,1,0.4,1,0.5,0.7],"spots":["Santa Sofia","Mesquita Azul","Grande Bazar","Torre de Gálata"]},
+{"id":39,"n":"Porto","country":"Portugal","region":"Europa","emoji":"🍷","img":"https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&w=1000","budget":4100,"desc":"Ruas de pedra, rio Douro, arquitetura e gastronomia portuguesa.","tags":["Cultura","Gastronomia","Romance"],"w":[0.3,0.9,0.6,1,0.5,0.8],"spots":["Ribeira","Ponte Dom Luís I","Livraria Lello","Vila Nova de Gaia"]},
+{"id":40,"n":"Madeira","country":"Portugal","region":"Europa","emoji":"🌿","img":"https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1000","budget":5600,"desc":"Montanhas verdes, trilhas, piscinas naturais e vistas sobre o Atlântico.","tags":["Aventura","Relaxamento","Natureza"],"w":[1,0.5,0.8,0.5,0.2,0.7],"spots":["Pico do Arieiro","Cabo Girão","Funchal","Piscinas do Porto Moniz"]},
+{"id":41,"n":"Tromsø","country":"Noruega","region":"Europa","emoji":"🌌","img":"https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1000","budget":11200,"desc":"Cenários árticos, fiordes e possibilidade sazonal de observar a aurora boreal.","tags":["Aventura","Natureza","Romance"],"w":[1,0.6,0.6,0.3,0.2,0.8],"spots":["Teleférico Fjellheisen","Catedral do Ártico","Passeio pelos fiordes","Aurora boreal (sazonal)"]},
+{"id":42,"n":"Interlaken","country":"Suíça","region":"Europa","emoji":"🏔️","img":"https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=1000","budget":10500,"desc":"Lagos alpinos, vilarejos charmosos e montanhas para explorar.","tags":["Aventura","Natureza","Relaxamento"],"w":[1,0.5,0.7,0.4,0.2,0.7],"spots":["Lago Thun","Lago Brienz","Harder Kulm","Jungfraujoch"]},
+{"id":43,"n":"Pequim","country":"China","region":"Ásia","emoji":"🐉","img":"https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1000","budget":8200,"desc":"Palácios imperiais, grandes avenidas e acesso à histórica Grande Muralha.","tags":["Cultura","Gastronomia","Aventura"],"w":[0.5,1,0.3,0.9,0.3,0.4],"spots":["Cidade Proibida","Grande Muralha","Templo do Céu","Palácio de Verão"]},
+{"id":44,"n":"Xangai","country":"China","region":"Ásia","emoji":"🌆","img":"https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?auto=format&fit=crop&w=1000","budget":8800,"desc":"Arranha-céus, bairros históricos, arte contemporânea e culinária regional.","tags":["Cultura","Gastronomia","Vida noturna"],"w":[0.4,0.9,0.3,1,0.8,0.4],"spots":["The Bund","Jardim Yu","Torre de Xangai","French Concession"]},
+{"id":45,"n":"Hanói","country":"Vietnã","region":"Ásia","emoji":"🛵","img":"https://images.unsplash.com/photo-1509030450996-dd1a26dda07a?auto=format&fit=crop&w=1000","budget":4900,"desc":"Lagos, templos, mercados e uma das cenas gastronômicas mais interessantes da Ásia.","tags":["Cultura","Gastronomia","Aventura"],"w":[0.5,0.9,0.4,1,0.5,0.4],"spots":["Lago Hoan Kiem","Templo da Literatura","Old Quarter","Mausoléu de Ho Chi Minh"]},
+{"id":46,"n":"Phuket","country":"Tailândia","region":"Ásia","emoji":"🏝️","img":"https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=1000","budget":5900,"desc":"Praias tropicais, passeios de barco e noites animadas no sul tailandês.","tags":["Relaxamento","Vida noturna","Romance"],"w":[0.6,0.4,1,0.8,1,0.8],"spots":["Patong Beach","Kata Beach","Ilhas Phi Phi","Big Buddha"]},
+{"id":47,"n":"Singapura","country":"Singapura","region":"Ásia","emoji":"🌺","img":"https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1000","budget":9200,"desc":"Jardins futuristas, bairros multiculturais e gastronomia de rua premiada.","tags":["Cultura","Gastronomia","Vida noturna"],"w":[0.3,0.8,0.5,1,0.8,0.5],"spots":["Gardens by the Bay","Marina Bay Sands","Chinatown","Jewel Changi"]},
+{"id":48,"n":"Kathmandu","country":"Nepal","region":"Ásia","emoji":"🏔️","img":"https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1000","budget":6900,"desc":"Templos, mercados e a atmosfera única do vale do Himalaia.","tags":["Aventura","Cultura","Natureza"],"w":[1,1,0.3,0.6,0.2,0.4],"spots":["Praça Durbar","Swayambhunath","Boudhanath","Patan"]},
+{"id":49,"n":"Jaipur","country":"Índia","region":"Ásia","emoji":"🕌","img":"https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1000","budget":5700,"desc":"Palácios rosados, fortes, bazares e tradições do Rajastão.","tags":["Cultura","Gastronomia","Aventura"],"w":[0.5,1,0.3,0.9,0.4,0.6],"spots":["Hawa Mahal","Amber Fort","City Palace","Jantar Mantar"]},
+{"id":50,"n":"Colombo e Galle","country":"Sri Lanka","region":"Ásia","emoji":"🐘","img":"https://images.unsplash.com/photo-1588598198321-9735fd5c1c2d?auto=format&fit=crop&w=1000","budget":6500,"desc":"Templos, fortalezas coloniais, praias e paisagens tropicais.","tags":["Cultura","Relaxamento","Aventura"],"w":[0.7,0.9,0.8,0.7,0.3,0.7],"spots":["Galle Fort","Templo Gangaramaya","Praias do sul","Jardim Botânico Peradeniya"]},
+{"id":51,"n":"Cidade do México","country":"México","region":"Américas","emoji":"🌮","img":"https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?auto=format&fit=crop&w=1000","budget":5200,"desc":"Museus, bairros vibrantes, sítios históricos e uma gastronomia marcante.","tags":["Cultura","Gastronomia","Vida noturna"],"w":[0.4,1,0.3,1,0.8,0.5],"spots":["Museu Frida Kahlo","Centro Histórico","Chapultepec","Coyoacán"]},
+{"id":52,"n":"Cancún","country":"México","region":"Américas","emoji":"🌴","img":"https://images.unsplash.com/photo-1510097467424-192d713fd8b2?auto=format&fit=crop&w=1000","budget":6200,"desc":"Mar azul-turquesa, praias caribenhas e ruínas maias nas proximidades.","tags":["Relaxamento","Aventura","Romance"],"w":[0.6,0.6,1,0.6,0.7,0.9],"spots":["Zona Hoteleira","Isla Mujeres","Chichén Itzá","Cenotes"]},
+{"id":53,"n":"Havana","country":"Cuba","region":"Américas","emoji":"🚗","img":"https://images.unsplash.com/photo-1500759285222-a95626b934cb?auto=format&fit=crop&w=1000","budget":5900,"desc":"Arquitetura colorida, música ao vivo e história em cada esquina.","tags":["Cultura","Gastronomia","Vida noturna"],"w":[0.3,1,0.5,0.8,1,0.7],"spots":["Habana Vieja","Malecón","Plaza de la Revolución","Fábrica de Arte Cubano"]},
+{"id":54,"n":"San José e Arenal","country":"Costa Rica","region":"Américas","emoji":"🦥","img":"https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1000","budget":7600,"desc":"Florestas tropicais, vulcões, fontes termais e biodiversidade exuberante.","tags":["Aventura","Natureza","Relaxamento"],"w":[1,0.5,0.8,0.5,0.3,0.7],"spots":["Vulcão Arenal","La Fortuna","Monteverde","Parque Manuel Antonio"]},
+{"id":55,"n":"Deserto do Atacama","country":"Chile","region":"Américas","emoji":"🌵","img":"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000","budget":7300,"desc":"Vales áridos, salares, lagoas altiplânicas e céus extraordinários.","tags":["Aventura","Natureza","Romance"],"w":[1,0.6,0.4,0.4,0.1,0.8],"spots":["Valle de la Luna","Lagunas Escondidas","Gêiseres del Tatio","Observação astronômica"]},
+{"id":56,"n":"Salar de Uyuni","country":"Bolívia","region":"Américas","emoji":"🪞","img":"https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1000","budget":6200,"desc":"O maior deserto de sal do mundo cria paisagens surreais, especialmente na época de espelho d’água.","tags":["Aventura","Natureza","Fotografia"],"w":[1,0.5,0.3,0.4,0.1,0.7],"spots":["Salar de Uyuni","Ilha Incahuasi","Cemitério de Trens","Lagunas Coloradas"]},
+{"id":57,"n":"Ilhas Galápagos","country":"Equador","region":"Américas","emoji":"🐢","img":"https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1000","budget":12800,"desc":"Vida selvagem singular, águas transparentes e natureza protegida.","tags":["Aventura","Natureza","Relaxamento"],"w":[1,0.5,0.8,0.4,0.2,0.7],"spots":["Ilha Santa Cruz","Tortuga Bay","Estação Charles Darwin","Ilha Isabela"]},
+{"id":58,"n":"Vancouver","country":"Canadá","region":"Américas","emoji":"🌲","img":"https://images.unsplash.com/photo-1519832979-6fa011b87667?auto=format&fit=crop&w=1000","budget":8900,"desc":"Uma cidade cercada por montanhas, parques, mar e diversidade cultural.","tags":["Aventura","Cultura","Natureza"],"w":[0.8,0.8,0.6,0.7,0.6,0.5],"spots":["Stanley Park","Granville Island","Capilano Bridge","Grouse Mountain"]},
+{"id":59,"n":"Banff","country":"Canadá","region":"Américas","emoji":"🏞️","img":"https://images.unsplash.com/photo-1503614472-8c93d56cd6b0?auto=format&fit=crop&w=1000","budget":10400,"desc":"Lagos glaciais, trilhas e montanhas icônicas nas Rochosas canadenses.","tags":["Aventura","Natureza","Relaxamento"],"w":[1,0.4,0.7,0.3,0.1,0.7],"spots":["Lake Louise","Moraine Lake","Banff Gondola","Johnston Canyon"]},
+{"id":60,"n":"São Francisco","country":"Estados Unidos","region":"Américas","emoji":"🌉","img":"https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1000","budget":9900,"desc":"Bondes históricos, bairros criativos, gastronomia e vistas da baía.","tags":["Cultura","Gastronomia","Aventura"],"w":[0.4,0.9,0.3,0.9,0.7,0.6],"spots":["Golden Gate Bridge","Fisherman’s Wharf","Alcatraz","Painted Ladies"]},
+{"id":61,"n":"Los Angeles","country":"Estados Unidos","region":"Américas","emoji":"🎬","img":"https://images.unsplash.com/photo-1515894347714-3c2c7f1f5b3a?auto=format&fit=crop&w=1000","budget":10200,"desc":"Cinema, praias, bairros famosos e uma cena cultural diversa.","tags":["Cultura","Relaxamento","Vida noturna"],"w":[0.5,0.7,0.5,0.8,1,0.6],"spots":["Griffith Observatory","Santa Monica","The Getty","Hollywood"]},
+{"id":62,"n":"Orlando","country":"Estados Unidos","region":"Américas","emoji":"🎢","img":"https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=1000","budget":8500,"desc":"Parques temáticos, entretenimento e opções para viagens em família.","tags":["Aventura","Relaxamento","Gastronomia"],"w":[0.8,0.5,0.6,0.7,0.8,0.6],"spots":["Walt Disney World","Universal Orlando","ICON Park","Lake Eola"]},
+{"id":63,"n":"Nairóbi","country":"Quênia","region":"África","emoji":"🦒","img":"https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1000","budget":9200,"desc":"Uma capital vibrante com reservas naturais e cultura queniana.","tags":["Aventura","Cultura","Natureza"],"w":[1,0.8,0.4,0.6,0.4,0.4],"spots":["Nairobi National Park","Giraffe Centre","Karen Blixen Museum","Maasai Market"]},
+{"id":64,"n":"Melbourne","country":"Austrália","region":"Oceania","emoji":"☕","img":"https://images.unsplash.com/photo-1514395462725-fb4566210144?auto=format&fit=crop&w=1000","budget":11800,"desc":"Cafés, arte urbana, eventos esportivos e passeios pela costa australiana.","tags":["Cultura","Gastronomia","Vida noturna"],"w":[0.5,0.9,0.5,1,0.8,0.5],"spots":["Hosier Lane","Queen Victoria Market","Royal Botanic Gardens","Great Ocean Road"]}];
+const questions=[
+ {t:"Num sábado livre, você prefere...",o:[["🥾","Fazer uma trilha ou esporte radical",0],["🖼️","Visitar um museu ou centro histórico",1],["🛋️","Descansar sem pressa",2],["🍽️","Descobrir um restaurante novo",3]]},
+ {t:"Sua hospedagem ideal é...",o:[["⛺","Cabana ou camping na natureza",0],["🏨","Hotel boutique no centro histórico",1],["🌊","Resort com vista para o mar",2],["🌃","Hospedagem perto da vida noturna",4],["🕯️","Pousada charmosa e reservada",5]]},
+ {t:"O que não pode faltar na viagem?",o:[["📸","Paisagens de tirar o fôlego",0],["📚","Histórias e tradições locais",1],["🍷","Comida e bebida típicas",3],["🎶","Música e vida noturna",4],["🌅","Um pôr do sol especial",5]]},
+ {t:"Com quem você costuma viajar?",o:[["🧗","Amigos aventureiros",0],["🧳","Sozinho, no meu ritmo",1],["👨‍👩‍👧","Família, com tranquilidade",2],["🥳","Uma turma animada",4],["❤️","Meu par",5]]},
+ {t:"Como é o roteiro perfeito?",o:[["⚡","Cheio de atividades",0],["🗺️","Planejado com pontos turísticos",1],["🧘","Sem horários, relaxando",2],["🥘","Montado em torno de refeições",3]]},
+ {t:"Qual frase tem mais a sua cara?",o:[["🔥","Quero emoção e descobertas",0],["🎭","Quero entender outras culturas",1],["🌴","Quero desligar de tudo",2],["💃","Quero dançar e conhecer gente",4],["🌹","Quero criar memórias a dois",5]]}
+];
+let scores=[0,0,0,0,0,0],questionIndex=0,profile=load("st_profile",null),favorites=load("st_favorites",[]),activeRegion="Todos",lastPlan="";
+function load(k,f){try{return JSON.parse(localStorage.getItem(k))??f}catch(e){return f}}
+function save(){try{localStorage.setItem("st_profile",JSON.stringify(profile));localStorage.setItem("st_favorites",JSON.stringify(favorites))}catch(e){}}
+let localUser=load("st_local_user",null);
+function refreshLogin(){const b=document.getElementById("loginOpen"),label=document.getElementById("loginLabel");if(!b||!label)return;if(localUser){label.textContent=localUser.name.split(" ")[0];b.classList.add("signed");b.title="Perfil neste dispositivo"}else{label.textContent="Entrar";b.classList.remove("signed");b.title="Entrar no Secret Travel"}}
+function openLogin(){document.getElementById("loginName").value=localUser?.name||"";document.getElementById("loginModal").classList.remove("hidden");setTimeout(()=>document.getElementById("loginName").focus(),40)}
+function closeLogin(){document.getElementById("loginModal").classList.add("hidden")}
+document.getElementById("loginOpen").addEventListener("click",openLogin);document.getElementById("loginClose").addEventListener("click",closeLogin);document.getElementById("loginModal").addEventListener("click",e=>{if(e.target.id==="loginModal")closeLogin()});
+document.getElementById("loginForm").addEventListener("submit",e=>{e.preventDefault();const name=document.getElementById("loginName").value.trim();if(!name)return;localUser={name};try{localStorage.setItem("st_local_user",JSON.stringify(localUser))}catch(e){}refreshLogin();closeLogin();showToast(`Bem-vindo(a), ${name.split(" ")[0]}!`)});
+
+function money(n){return n.toLocaleString("pt-BR",{style:"currency",currency:"BRL",maximumFractionDigits:0})}
+function match(d){if(!profile)return null;let total=profile.reduce((a,b)=>a+b,0)||1;return Math.min(99,Math.round(100*profile.reduce((a,v,i)=>a+v*d.w[i],0)/total))}
+function showToast(t){const el=document.getElementById("toast");el.textContent=t;el.classList.remove("hidden");clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.classList.add("hidden"),2500)}
+function setView(v){document.querySelectorAll("main>section").forEach(x=>x.classList.add("hidden"));document.getElementById(v+"View").classList.remove("hidden");document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===v));if(v==="destinations")drawDestinations();if(v==="favorites")drawFavorites();if(v==="hotels")populateHotelSelect();if(v==="planner")populatePlanSelect();window.scrollTo({top:0,behavior:"smooth"})}
+document.getElementById("nav").addEventListener("click",e=>{const b=e.target.closest("button[data-view]");if(b)setView(b.dataset.view)});
+document.getElementById("exploreBtn").onclick=()=>setView("destinations");
+document.getElementById("startQuiz").onclick=startQuiz;
+document.getElementById("quizFromDest").onclick=startQuiz;
+function startQuiz(){scores=[0,0,0,0,0,0];questionIndex=0;setView("quiz");renderQuestion()}
+function renderQuestion(){const q=questions[questionIndex];document.getElementById("quizCount").textContent=`PERGUNTA ${questionIndex+1} DE ${questions.length}`;document.getElementById("quizProgress").style.width=((questionIndex)/questions.length*100)+"%";document.getElementById("questionText").textContent=q.t;document.getElementById("options").innerHTML=q.o.map((o,i)=>`<button class="option" data-index="${i}"><span>${o[0]}</span>${o[1]}</button>`).join("")}
+document.getElementById("options").addEventListener("click",e=>{const b=e.target.closest(".option");if(!b)return;const q=questions[questionIndex];scores[q.o[+b.dataset.index][2]]++;questionIndex++;if(questionIndex<questions.length)renderQuestion();else{profile=scores.slice();save();showToast("Seu perfil foi descoberto!");setView("destinations");drawDestinations()}});
+document.getElementById("quitQuiz").onclick=()=>setView("home");
+function profileBanner(){if(!profile)return "";const idx=profile.indexOf(Math.max(...profile));const p=profiles[idx];return `<div class="profile-banner"><div class="profile-emoji">${p.emoji}</div><div><strong>Seu perfil: ${p.name}</strong><p>${p.desc}</p></div><button class="btn secondary small" style="margin-left:auto" onclick="startQuiz()">Refazer quiz</button></div>`}
+function cardHTML(d){const m=match(d);return `<article class="card" data-id="${d.id}"><div class="cover"><span class="fallback">${d.emoji}</span><img src="${d.img}" alt="${d.n}" loading="lazy" onerror="this.style.display='none'"><span class="region">${d.region}</span>${m!==null?`<span class="match">${m}% match</span>`:""}<button class="heart ${favorites.includes(d.id)?"on":""}" data-fav="${d.id}" aria-label="Favoritar">${favorites.includes(d.id)?"♥":"♡"}</button></div><div class="card-body"><h3>${d.n}, ${d.country}</h3><p>${d.desc}</p><div class="card-meta"><span>Estimativa por pessoa</span><b>${money(d.budget)}</b></div></div></article>`}
+function drawDestinations(){document.getElementById("profileDest").innerHTML=profileBanner();let q=document.getElementById("searchDest").value.toLowerCase().trim(),reg=document.getElementById("regionFilter").value,bud=+document.getElementById("budgetFilter").value,style=document.getElementById("styleFilter").value;let list=destinations.filter(d=>(reg==="Todos"||d.region===reg)&&(activeRegion==="Todos"||d.region===activeRegion)&&(bud===0||d.budget<=bud)&&(style==="Todos"||d.tags.includes(style))&&(`${d.n} ${d.country} ${d.desc} ${d.tags.join(" ")}`).toLowerCase().includes(q));if(profile)list.sort((a,b)=>match(b)-match(a));document.getElementById("destinationGrid").innerHTML=list.length?list.map(cardHTML).join(""):`<div class="empty">Não encontramos destinos com esses filtros. Tente ajustar sua pesquisa.</div>`;document.getElementById("regionChips").innerHTML=["Todos","Europa","Ásia","África","Américas","Oceania"].map(x=>`<button class="chip ${activeRegion===x?"active":""}" data-region="${x}">${x}</button>`).join("")}
+["searchDest","regionFilter","budgetFilter","styleFilter"].forEach(id=>document.getElementById(id).addEventListener(id==="searchDest"?"input":"change",()=>{activeRegion="Todos";drawDestinations()}));
+document.getElementById("regionChips").onclick=e=>{const b=e.target.closest("[data-region]");if(b){activeRegion=b.dataset.region;document.getElementById("regionFilter").value="Todos";drawDestinations()}};
+function toggleFav(id){favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];save();document.getElementById("favCount").textContent=favorites.length?`(${favorites.length})`:"";drawDestinations();drawFavorites();if(!document.getElementById("detailModal").classList.contains("hidden"))openDetail(id)}
+function drawFavorites(){const list=destinations.filter(d=>favorites.includes(d.id));document.getElementById("favoritesGrid").innerHTML=list.length?list.map(cardHTML).join(""):`<div class="empty">Você ainda não salvou destinos. Toque no coração de um card para guardar suas ideias. <br><br><button class="btn" onclick="setView('destinations')">Explorar destinos</button></div>`}
+document.addEventListener("click",e=>{const f=e.target.closest("[data-fav]");if(f){e.stopPropagation();toggleFav(+f.dataset.fav);return}const c=e.target.closest(".card[data-id]");if(c)openDetail(+c.dataset.id)});
+function openDetail(id){const d=destinations.find(x=>x.id===id);if(!d)return;const m=match(d);const bars=profile?`<div class="info-box" style="margin-top:15px"><h4>Afinidade por perfil</h4>${profiles.map((p,i)=>`<div class="scoreline"><b>${p.emoji} ${p.name}</b><i><em style="width:${d.w[i]*100}%"></em></i></div>`).join("")}</div>`:"";const hotelURL="https://www.google.com/travel/search?q="+encodeURIComponent("hotéis em "+d.n+" "+d.country);const mapURL="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(d.n+" "+d.country);document.getElementById("modalBox").innerHTML=`<div class="modal-cover"><img src="${d.img}" alt="${d.n}" onerror="this.style.display='none'"><button class="close" id="closeModal">×</button></div><div class="modal-content"><div class="kicker">${d.region} · ${d.country}</div><h2>${d.emoji} ${d.n}</h2><p>${d.desc}</p><div class="modal-columns"><div class="info-box"><h4>📍 O que explorar</h4><ul>${d.spots.map(x=>`<li>${x}</li>`).join("")}</ul></div><div class="info-box"><h4>💰 Orçamento de referência</h4><p style="font-size:1.3rem;font-weight:800;color:var(--ink)">${money(d.budget)}</p><p>Estimativa ilustrativa por pessoa. Confira custos reais antes de planejar.</p><h4 style="margin-top:12px">Interesses</h4><p>${d.tags.join(" · ")}</p></div></div>${m!==null?`<div class="info-box" style="margin-top:15px"><h4>✨ Afinidade com seu perfil: ${m}%</h4><p>Indicador orientativo calculado a partir das respostas do quiz e dos pesos de afinidade deste destino.</p></div>`:""}${bars}<div class="modal-actions"><button class="btn" id="modalFav">${favorites.includes(id)?"♥ Remover favorito":"♡ Salvar favorito"}</button><a class="btn secondary" target="_blank" rel="noopener" href="${hotelURL}">Pesquisar hotéis ↗</a><a class="btn outline" target="_blank" rel="noopener" href="${mapURL}">Ver no mapa ↗</a></div></div>`;document.getElementById("detailModal").classList.remove("hidden");document.getElementById("closeModal").onclick=closeModal;document.getElementById("modalFav").onclick=()=>toggleFav(id)}
+function closeModal(){document.getElementById("detailModal").classList.add("hidden")}
+document.getElementById("detailModal").addEventListener("click",e=>{if(e.target.id==="detailModal")closeModal()});document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+
+const lodgingTypes=[
+ {id:"econômico",icon:"🎒",name:"Hostel ou pousada econômica",desc:"Boa opção para priorizar passeios, conhecer outros viajantes e manter o orçamento sob controle.",tag:"ECONOMIA"},
+ {id:"boutique",icon:"🗝️",name:"Hotel boutique ou pousada charmosa",desc:"Hospedagem com personalidade, localização interessante e uma experiência mais intimista.",tag:"CHARME"},
+ {id:"resort",icon:"🌊",name:"Resort ou hotel de lazer",desc:"Estrutura para descansar, aproveitar piscina, praia, spa e serviços no próprio local.",tag:"DESCANSO"},
+ {id:"luxo",icon:"✨",name:"Hotel premium",desc:"Mais conforto, serviços e comodidades para quem quer elevar a experiência da estadia.",tag:"CONFORTO"},
+ {id:"natureza",icon:"🌿",name:"Eco-lodge, cabana ou refúgio",desc:"Uma estadia conectada à paisagem, ideal para roteiros de natureza e aventura.",tag:"NATUREZA"}
+];
+function populateHotelSelect(){const sel=document.getElementById("hotelDest");if(sel.options.length<=1)sel.innerHTML='<option value="">Escolha um destino</option>'+destinations.map(d=>`<option value="${d.id}">${d.n}, ${d.country}</option>`).join("");if(!sel.value&&destinations.length)sel.value=profile?String(destinations.slice().sort((a,b)=>match(b)-match(a))[0].id):"1"}
+function getSuggestedLodging(d){let pref=document.getElementById("hotelStyle").value;if(pref==="auto"){if(profile){let p=profiles[profile.indexOf(Math.max(...profile))];pref=p.style}else pref="boutique"}let chosen=lodgingTypes.find(x=>x.id===pref)||lodgingTypes[1];let others=lodgingTypes.filter(x=>x.id!==chosen.id).slice(0,2);return [chosen,...others]}
+document.getElementById("findHotels").onclick=()=>{const d=destinations.find(x=>x.id===+document.getElementById("hotelDest").value);if(!d){showToast("Escolha um destino primeiro.");return}const opts=getSuggestedLodging(d);document.getElementById("hotelIntro").innerHTML=`<b style="color:white">${d.n}, ${d.country}</b> · Sugestões de hospedagem para comparar. Os resultados são estilos recomendados, não estabelecimentos avaliados ou disponibilidade confirmada.`;document.getElementById("hotelResults").innerHTML=opts.map(x=>`<div class="hotel"><div class="hotel-icon">${x.icon}</div><h3>${x.name}</h3><p>${x.desc}</p><span class="kind">${x.tag}</span><br><a target="_blank" rel="noopener" href="https://www.google.com/travel/search?q=${encodeURIComponent(x.name+" em "+d.n+" "+d.country)}">Pesquisar esta opção ↗</a></div>`).join("")};
+function populatePlanSelect(){const s=document.getElementById("planDestination");if(s.options.length===0)s.innerHTML=destinations.map(d=>`<option value="${d.id}">${d.n}, ${d.country}</option>`).join("")}
+document.getElementById("calculatePlan").onclick=()=>{const d=destinations.find(x=>x.id===+document.getElementById("planDestination").value),days=Math.max(1,Math.min(60,+document.getElementById("days").value||1)),people=Math.max(1,Math.min(20,+document.getElementById("people").value||1)),mult=+document.getElementById("travelStyle").value;const perPerson=d.budget*(.55+days/7*.45)*mult;const total=Math.round(perPerson*people);document.getElementById("budgetTotal").textContent=money(total);document.getElementById("budgetBreakdown").textContent=`${d.n} · ${days} dias · ${people} pessoa(s) · ${money(perPerson)} estimados por pessoa`;lastPlan=`SECRET TRAVEL — PLANEJAMENTO INICIAL\nDestino: ${d.n}, ${d.country}\nDuração: ${days} dias\nPessoas: ${people}\nEstilo: ${document.getElementById("travelStyle").selectedOptions[0].text}\nEstimativa de referência: ${money(total)}\nAnotações: ${document.getElementById("extraNotes").value||"—"}\n\nChecklist:\n- Definir datas\n- Comparar passagens e hospedagem\n- Conferir documentos e requisitos de entrada\n- Organizar seguro e transporte local\n- Montar roteiro e reservar atividades\n\nEstimativa ilustrativa; não é cotação.`;showToast("Estimativa calculada. Confira os avisos sobre valores.")};
+document.getElementById("copyPlan").onclick=async()=>{if(!lastPlan){showToast("Calcule uma estimativa antes de copiar.");return}try{await navigator.clipboard.writeText(lastPlan);showToast("Planejamento copiado!")}catch(e){showToast("Não foi possível copiar automaticamente neste navegador.")}};
+function init(){refreshLogin();document.getElementById("destCount").textContent=destinations.length+"+";document.getElementById("favCount").textContent=favorites.length?`(${favorites.length})`:"";document.getElementById("featuredGrid").innerHTML=[destinations[0],destinations[10],destinations[20]].map(cardHTML).join("");document.getElementById("profileHome").innerHTML=profile?profileBanner():"";populatePlanSelect();populateHotelSelect();if(profile){const p=profiles[profile.indexOf(Math.max(...profile))];document.getElementById("profileHome").innerHTML=profileBanner()}}
+init();
+</script>
+</body>
+</html>
